@@ -1,763 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Alejandro Grillo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switzerland · 16 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --gold:#c8960a;
-  --gold-bright:#f0b429;
-  --gold-dim:rgba(200,150,10,0.12);
-  --gold-mid:rgba(200,150,10,0.22);
-  --ink:#f5eedc;
-  --ink-strong:#fff8ee;
-  --muted:rgba(245,238,220,0.5);
-  --faint:rgba(245,238,220,0.3);
-  --border:rgba(200,150,10,0.18);
-  --surface:rgba(200,150,10,0.07);
-  --bg0:#0d0a04;
-  --bg1:#15100a;
-  --bg2:#1c160a;
-  --radius:12px;
+  :root{
+    --paper:#fbf9f4;
+    --paper-2:#f4efe6;
+    --beige:#e9e1d3;
+    --beige-deep:#ddd2bf;
+    --ink:#2c2823;
+    --ink-soft:#6b6357;
+    --line:#e2daccc;
+    --line:#e4ddd0;
+    --accent:#a8927a;
+    --maxw:900px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Archivo',sans-serif;
+    font-weight:300;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:.01em;
+  }
+  /* subtle paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background-image:radial-gradient(var(--beige) .5px,transparent .5px);
+    background-size:7px 7px;
+  }
+  .wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 28px}
 
-  /* Spring easing — overshoot then settle */
-  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --spring-soft: cubic-bezier(0.22, 1.4, 0.36, 1);
-  --spring-snappy: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{width:100%;height:100%;overflow:hidden;}
-body{font-family:system-ui,sans-serif;background:var(--bg0);color:var(--ink);line-height:1.6;}
-a{color:inherit;text-decoration:none;}
+  /* ---------- HERO ---------- */
+  header.hero{padding:96px 0 56px;text-align:center}
+  .eyebrow{
+    font-family:'Archivo',sans-serif;font-weight:500;
+    text-transform:uppercase;letter-spacing:.42em;
+    font-size:11px;color:var(--accent);margin-bottom:30px;
+    opacity:0;animation:rise .9s .1s forwards;
+  }
+  h1{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(48px,9vw,104px);line-height:.92;
+    letter-spacing:-.02em;
+    opacity:0;animation:rise 1s .25s forwards;
+  }
+  h1 em{font-style:italic;font-weight:300}
+  .dates{
+    margin-top:26px;font-size:14px;color:var(--ink-soft);
+    letter-spacing:.06em;
+    opacity:0;animation:rise 1s .45s forwards;
+  }
+  .rule{
+    width:42px;height:1px;background:var(--accent);margin:38px auto 0;
+    opacity:0;animation:grow 1s .6s forwards;
+  }
 
-/* ── LANDING ── */
-#landing{position:fixed;inset:0;z-index:1;}
-#c{display:block;width:100%;height:100%;}
-#cur{position:fixed;width:5px;height:5px;border-radius:50%;background:rgba(255,245,200,0.55);transform:translate(-50%,-50%);pointer-events:none;transition:width .08s,height .08s,opacity .1s;z-index:200;}
-#landing-ui{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
-.l-label{color:rgba(255,248,220,0.28);font-size:10px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:24px;}
-.l-h1{color:rgba(255,252,235,0.9);font-size:clamp(32px,5.5vw,72px);font-weight:200;letter-spacing:-.03em;margin-bottom:16px;text-align:center;text-shadow:0 0 100px rgba(255,220,120,0.2);}
-.l-sub{color:rgba(255,245,200,0.18);font-size:11px;letter-spacing:.2em;}
-#scroll-hint{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;z-index:3;animation:hintFade 2s ease 1.5s both;}
-#scroll-hint span{color:rgba(255,245,200,0.22);font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
-.chevron{width:14px;height:14px;border-right:1px solid rgba(255,245,200,0.18);border-bottom:1px solid rgba(255,245,200,0.18);transform:rotate(45deg);animation:bounce 1.8s ease-in-out infinite;}
-@keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0);}50%{transform:rotate(45deg) translateY(5px);}}
-@keyframes hintFade{from{opacity:0;transform:translateX(-50%) translateY(8px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+  /* ---------- INTRO META ---------- */
+  .meta{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+    margin:56px 0 64px;
+    opacity:0;animation:rise 1s .7s forwards;
+  }
+  .meta div{background:var(--paper);padding:26px 22px}
+  .meta dt{font-size:10px;text-transform:uppercase;letter-spacing:.26em;color:var(--accent);margin-bottom:10px}
+  .meta dd{font-family:'Fraunces',serif;font-size:18px;font-weight:300;line-height:1.35}
+  @media(max-width:640px){.meta{grid-template-columns:1fr}}
 
-/* ── SITE PANEL ── */
-#site{
-  position:fixed;
-  left:0;right:0;
-  top:100vh;
-  height:100vh;
-  z-index:10;
-  background:var(--bg1);
-  color:var(--ink);
-  overflow-y:hidden;
-  border-radius:20px 20px 0 0;
-  box-shadow:0 -20px 80px rgba(0,0,0,0.5);
-  will-change:transform,top;
-}
+  /* ---------- TABS ---------- */
+  .tabs{
+    display:flex;gap:8px;justify-content:center;
+    position:sticky;top:0;z-index:5;
+    padding:18px 0;background:linear-gradient(var(--paper) 72%,transparent);
+    margin-bottom:8px;
+  }
+  .tab{
+    font-family:'Archivo',sans-serif;font-weight:400;
+    font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-soft);background:transparent;
+    border:1px solid var(--beige-deep);border-radius:999px;
+    padding:11px 26px;cursor:pointer;transition:.35s ease;
+  }
+  .tab:hover{color:var(--ink);border-color:var(--accent)}
+  .tab.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 
+  /* ---------- VERSION BLURB ---------- */
+  .blurb{
+    text-align:center;max-width:620px;margin:14px auto 60px;
+    font-size:15px;color:var(--ink-soft);font-style:italic;
+    font-family:'Fraunces',serif;font-weight:300;line-height:1.6;
+  }
 
+  /* ---------- DAY ENTRIES ---------- */
+  .panel{display:none;animation:fade .6s ease}
+  .panel.show{display:block}
 
-/* ── NAV ── */
-nav{position:sticky;top:0;z-index:200;background:rgba(21,16,10,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
-.nav-inner{max-width:920px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;gap:1rem;}
-.nav-name{font-size:15px;font-weight:700;letter-spacing:-0.5px;cursor:pointer;color:var(--ink-strong);transition:color .2s;}
-.nav-name:hover{color:var(--gold-bright);}
-.nav-name span{color:var(--gold-bright);}
-.nav-tabs{display:flex;gap:3px;}
-.tab-btn{font-size:12px;padding:5px 13px;border-radius:100px;border:none;background:transparent;cursor:pointer;color:var(--muted);font-family:inherit;transition:all .2s;}
-.tab-btn:hover{color:var(--ink-strong);}
-.tab-btn.active{background:var(--gold-dim);color:var(--gold-bright);border:1px solid var(--gold-mid);font-weight:500;}
+  .day{
+    display:grid;grid-template-columns:120px 1fr;gap:36px;
+    padding:34px 0;border-top:1px solid var(--line);
+  }
+  .day:last-of-type{border-bottom:1px solid var(--line)}
+  .day-index{position:relative}
+  .day-num{
+    font-family:'Fraunces',serif;font-size:42px;font-weight:300;
+    line-height:1;color:var(--ink);
+  }
+  .day-num .d{font-size:13px;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:8px;font-family:'Archivo',sans-serif}
+  .day-date{font-size:12px;color:var(--ink-soft);letter-spacing:.05em;margin-top:12px}
+  .day-body h3{
+    font-family:'Fraunces',serif;font-weight:400;font-size:23px;
+    line-height:1.25;margin-bottom:12px;letter-spacing:-.01em;
+  }
+  .day-body p{font-size:14.5px;color:var(--ink-soft);max-width:60ch}
+  .day-body p+p{margin-top:10px}
+  .region{
+    display:inline-block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px;
+  }
+  .tag{
+    display:inline-block;font-family:'Archivo',sans-serif;font-weight:500;
+    font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    background:var(--beige);color:var(--ink);
+    padding:5px 11px;border-radius:3px;margin:0 6px 6px 0;
+  }
+  .tag.peak{background:var(--ink);color:var(--paper)}
+  .tag.lake{background:var(--beige-deep)}
+  .tag.event{background:#c9a98a;color:#fff}
+  .tag.must{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+  /* mandatory stop: accent rail + tinted panel */
+  .day.must{
+    background:linear-gradient(90deg,rgba(168,146,122,.10),rgba(168,146,122,0) 55%);
+    border-left:2px solid var(--accent);
+    padding-left:22px;margin-left:-24px;
+  }
+  .day.must .region{color:var(--ink);font-weight:600}
+  .day.must .region::before{content:"★ ";color:var(--accent)}
+  @media(max-width:640px){.day.must{margin-left:-12px;padding-left:12px}}
+  @media(max-width:640px){
+    .day{grid-template-columns:1fr;gap:14px;padding:28px 0}
+    .day-num{font-size:34px}
+  }
 
-/* ── PAGES ── */
-.page{display:none;max-width:920px;margin:0 auto;padding:4.5rem 2rem 5rem;}
-.page.active{display:block;}
+  /* ---------- NOTES ---------- */
+  .notes{margin:80px 0 40px}
+  .notes h2,.section-head{
+    font-family:'Fraunces',serif;font-weight:300;font-size:32px;
+    letter-spacing:-.01em;margin-bottom:8px;text-align:center;
+  }
+  .section-head{margin-bottom:46px}
+  .section-sub{text-align:center;color:var(--ink-soft);font-size:13px;letter-spacing:.04em;margin-bottom:50px}
+  .note{
+    border-top:1px solid var(--line);padding:24px 0;
+    display:grid;grid-template-columns:200px 1fr;gap:30px;
+  }
+  .note:last-child{border-bottom:1px solid var(--line)}
+  .note h4{font-family:'Fraunces',serif;font-weight:400;font-size:17px}
+  .note p{font-size:14px;color:var(--ink-soft);max-width:62ch}
+  @media(max-width:640px){.note{grid-template-columns:1fr;gap:8px}}
 
-/* ── FLY-IN (used post-reveal for non-home tabs) ── */
-.fly{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease;}
-.fly.in{opacity:1;transform:translateY(0);}
+  footer{text-align:center;padding:70px 0 90px;color:var(--ink-soft);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+  footer .rule{margin:0 auto 34px}
 
-
-
-/* ── HERO ── */
-.hero-tag{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);margin-bottom:1rem;}
-h1.site-h1{font-size:clamp(2.4rem,5.5vw,3.6rem);font-weight:700;letter-spacing:-2px;line-height:1.05;margin-bottom:1.3rem;color:var(--ink-strong);}
-h1.site-h1 em{font-style:normal;color:rgba(245,238,220,0.25);}
-h1.site-h1 .accent{color:var(--gold-bright);}
-.hero-sub{font-size:1rem;color:var(--muted);max-width:500px;line-height:1.8;margin-bottom:2rem;}
-.pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:3.5rem;}
-.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;border:1px solid var(--border);border-radius:100px;padding:5px 13px;color:var(--muted);cursor:default;transition:all .2s;}
-.pill:hover{border-color:var(--gold);color:var(--ink-strong);}
-.pill-link{cursor:pointer;text-decoration:none;}
-.pill-link:hover{border-color:var(--gold-bright);color:var(--gold-bright);background:var(--gold-dim);box-shadow:0 0 18px rgba(240,180,40,0.15);}
-
-/* ── SECTIONS ── */
-.sec{margin-bottom:3.5rem;}
-.sec-label{font-size:11px;letter-spacing:0.13em;text-transform:uppercase;color:var(--gold);margin-bottom:1.6rem;padding-bottom:.8rem;border-bottom:1px solid var(--border);opacity:0.7;}
-.exp{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:2.4rem;padding-bottom:2.4rem;border-bottom:1px solid rgba(200,150,10,0.1);}
-.exp:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
-.exp-role{font-size:14px;font-weight:600;margin-bottom:2px;color:var(--ink-strong);}
-.exp-co{font-size:13px;color:var(--muted);margin-bottom:.8rem;}
-.exp-date{font-size:12px;color:var(--faint);white-space:nowrap;padding-top:2px;}
-ul.bullets{list-style:none;}
-ul.bullets li{font-size:13px;color:var(--muted);padding:3px 0 3px 1rem;position:relative;line-height:1.7;}
-ul.bullets li::before{content:'—';position:absolute;left:0;color:rgba(200,150,10,0.3);}
-.edu{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.4rem;}
-.edu-school{font-size:14px;font-weight:600;color:var(--ink-strong);}
-.edu-deg{font-size:13px;color:var(--muted);}
-.edu-date{font-size:12px;color:var(--faint);white-space:nowrap;padding-top:2px;}
-
-/* ── SKILLS ── */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.4rem;}
-.sg-name{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:.5rem;}
-.tags{display:flex;flex-wrap:wrap;gap:5px;}
-.tag{font-size:12px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:3px 9px;color:var(--muted);cursor:default;transition:all .18s;}
-.tag:hover{background:var(--gold-dim);color:var(--gold-bright);border-color:var(--gold-mid);}
-
-/* ── CARDS ── */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:1.1rem;}
-.card{border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem;background:var(--bg2);position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s;}
-.card:hover{border-color:rgba(200,150,10,0.4);box-shadow:0 8px 32px rgba(0,0,0,0.3);}
-.card-title{font-size:14px;font-weight:600;margin-bottom:4px;color:var(--ink-strong);}
-.card-sub{font-size:12px;color:var(--faint);margin-bottom:8px;}
-.card-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:12px;}
-.card-tags{display:flex;flex-wrap:wrap;gap:4px;}
-.card-tags span{font-size:11px;background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:2px 7px;color:var(--faint);}
-
-/* ── STAT CARDS ── */
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:2.5rem;}
-.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.2rem;position:relative;overflow:hidden;cursor:default;transition:border-color .2s;}
-.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--gold-bright);transform:scaleX(0);transition:transform .3s;transform-origin:left;}
-.stat-card:hover{border-color:rgba(200,150,10,0.4);}
-.stat-card:hover::after{transform:scaleX(1);}
-.stat-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:5px;}
-.stat-val{font-size:24px;font-weight:700;letter-spacing:-1px;color:var(--ink-strong);line-height:1;}
-.stat-val.gold{color:var(--gold-bright);}
-.stat-desc{font-size:11px;color:var(--faint);margin-top:4px;}
-
-/* ── COVERAGE TABLE ── */
-.cov-table{width:100%;border-collapse:collapse;font-size:13px;}
-.cov-table th{text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding:0 12px 10px 0;font-weight:500;}
-.cov-table td{padding:11px 12px 11px 0;border-top:1px solid rgba(200,150,10,0.1);color:var(--muted);vertical-align:middle;}
-.cov-table tr:hover td{background:var(--surface);}
-.cov-table td:last-child{text-align:right;}
-.rating{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:5px;}
-.r-buy{background:rgba(200,150,10,0.15);color:var(--gold-bright);}
-.r-exit{background:rgba(245,238,220,0.07);color:var(--muted);}
-.r-progress{background:rgba(200,150,10,0.1);color:rgba(240,180,40,0.8);}
-.live-dot{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.08em;color:#ff5a5a;background:rgba(255,70,70,0.12);border:1px solid rgba(255,70,70,0.35);border-radius:4px;padding:1px 5px;margin-right:8px;vertical-align:middle;text-transform:uppercase;animation:livePulse 1.8s ease-in-out infinite;}
-@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.45;}}
-
-/* ── FILM ENTRY ── */
-.film-entry{margin-bottom:2.5rem;}
-.film-meta{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:14px;}
-
-/* ── PHOTO GRID ── */
-.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
-.photo-cell{border-radius:8px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:all .25s;}
-.photo-cell:hover{transform:scale(1.02);border-color:rgba(200,150,10,0.4);}
-.photo-cell.wide{grid-column:span 2;}.photo-cell.tall{grid-row:span 2;}
-.photo-placeholder{width:100%;min-height:130px;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--faint);font-size:12px;}
-.photo-cell.tall .photo-placeholder{min-height:270px;}.photo-cell.wide .photo-placeholder{min-height:110px;}
-
-/* ── CURSOR GLOW ── */
-.cursor-glow{pointer-events:none;position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,150,10,0.04) 0%,transparent 70%);transform:translate(-50%,-50%);z-index:0;}
-
-footer{border-top:1px solid var(--border);max-width:920px;margin:0 auto;padding:1.5rem 2rem;font-size:12px;color:var(--faint);display:flex;justify-content:space-between;}
-footer span.g{color:var(--gold-bright);}
+  /* ---------- ANIMATIONS ---------- */
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes grow{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:scaleX(1)}}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
-<div id="landing"><canvas id="c"></canvas></div>
-<div id="landing-ui" style="align-items:center;">
-  <p class="l-sub" style="letter-spacing:.32em;text-shadow:0 0 15px rgba(255,210,100,0.5),0 0 40px rgba(255,190,60,0.2);margin-bottom:20px;">Finance &nbsp;·&nbsp; Data Science &nbsp;·&nbsp; Film</p>
-  <h1 class="l-h1" style="font-size:clamp(42px,8vw,100px);font-weight:200;letter-spacing:.08em;line-height:0.95;text-shadow:0 0 40px rgba(255,210,100,0.28),0 0 80px rgba(255,190,60,0.1);text-align:center;">Alejandro Grillo</h1>
-  <div style="width:40px;height:1px;background:rgba(255,210,100,0.3);margin:24px 0;"></div>
-  <p class="l-sub" style="letter-spacing:.22em;text-shadow:0 0 20px rgba(255,210,100,0.15);">scroll to enter</p>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">A 16-Day Route</div>
+    <h1>Switzerland,<br><em>end to end</em></h1>
+    <div class="dates">Tue 28 July — Wed 12 August 2026</div>
+    <div class="rule"></div>
+  </header>
+
+  <dl class="meta">
+    <div><dt>The Anchor</dt><dd>Street Parade<br>Sat 8 August</dd></div>
+    <div><dt>Mandatory</dt><dd>Verzasca · Oeschinensee · Lungern</dd></div>
+    <div><dt>Camps</dt><dd>A peak at sunrise<br>& a lake at dusk</dd></div>
+  </dl>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="packed">Packed — see it all</button>
+    <button class="tab" data-tab="lax">Lax — slow & easy</button>
+  </div>
+
+  <!-- ============ PACKED ============ -->
+  <section class="panel show" id="packed">
+    <p class="blurb">Everything in: three camp nights, every lake, the works. Fast feet, big payoff.</p>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 01</span>28</div><div class="day-date">Tue 28 Jul</div></div>
+      <div class="day-body"><span class="region">Zurich</span><h3>Land at 11am, then the river</h3>
+      <p>Drop bags. Drift the Limmat at <strong>Flussbad Unterer Letten</strong>, the free public river bath, to shake off the flight. Old Town dinner. Stash a bag of Parade clothes at the hotel — you loop back here in eleven days.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 02</span>29</div><div class="day-date">Wed 29 Jul</div></div>
+      <div class="day-body"><span class="region">Appenzell</span><h3>The most traditional canton</h3>
+      <p>Train ~1h45 to painted-house country. Cable car up <strong>Ebenalp</strong>, walk to the <strong>Aescher</strong> cliff guesthouse, then down to <strong>Seealpsee</strong> — peak, restaurant, and an alpine lake in one loop.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 03</span>30</div><div class="day-date">Thu 30 Jul</div></div>
+      <div class="day-body"><span class="region">Glarus</span><h3>Move to the Obersee valley</h3>
+      <p>Travel to <strong>Näfels</strong>, the gateway up to Obersee. Quiet afternoon, early night before the lake camp.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 04</span>31</div><div class="day-date">Fri 31 Jul</div></div>
+      <div class="day-body"><span class="region">Glarus</span><span class="tag lake">Lake Camp I</span><h3>Obersee — the postcard tent night</h3>
+      <p>Up to <strong>Lake Obersee</strong> (983m), the Brünnelistock mirrored in still water. Lakeside campground, no reservation needed. If energy's high, fit the steep <strong>Limmernsee</strong> funicular-and-hike nearby. Swim, pitch on the grass.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 05</span>01</div><div class="day-date">Sat 1 Aug</div></div>
+      <div class="day-body"><span class="region">Obwalden</span><h3>Lungern, on national day</h3>
+      <p>Golden Pass line via Lucerne to <strong>Lungerersee</strong> — turquoise, swimmable at ~23°C, beaches. Do the road viewpoint and the climb to <strong>Schönbüel</strong> for the aerial shot. Bonfires and fireworks for Swiss National Day after dark.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 06</span>02</div><div class="day-date">Sun 2 Aug</div></div>
+      <div class="day-body"><span class="region">→ Ticino</span><h3>South, over the Alps</h3>
+      <p>A long, gorgeous ride to <strong>Locarno</strong>. Palms, Lake Maggiore, Italian Switzerland — a different country entirely. Evening on the waterfront.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 07</span>03</div><div class="day-date">Mon 3 Aug</div></div>
+      <div class="day-body"><span class="region">Verzasca Valley</span><h3>The emerald river</h3>
+      <p>PostBus up the valley (no train). <strong>Lavertezzo's Ponte dei Salti</strong> stone bridge and its impossibly green pools — swim with care, the current is strong. On to <strong>Sonogno</strong> or tiny <strong>Corippo</strong>. No wild camping here; day trip only.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 08</span>04</div><div class="day-date">Tue 4 Aug</div></div>
+      <div class="day-body"><span class="region">→ Kandersteg</span><h3>North to the Bernese Oberland</h3>
+      <p>Travel via Bern to <strong>Kandersteg</strong>. Settle, scope the Oeschinensee gondola for tomorrow.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 09</span>05</div><div class="day-date">Wed 5 Aug</div></div>
+      <div class="day-body"><span class="region">Kandersteg</span><span class="tag lake">Lake Camp II</span><h3>Oeschinensee, walled in rock</h3>
+      <p>Gondola and a short walk to the UNESCO turquoise lake under towering cliffs — the most dramatic water of the trip. Use the legal <strong>lakeside campground</strong>. Hike the shore, swim.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 10</span>06</div><div class="day-date">Thu 6 Aug</div></div>
+      <div class="day-body"><span class="region">→ Valais</span><h3>To Arolla</h3>
+      <p>Kandersteg → Brig → <strong>Sion</strong>, then PostBus up the <strong>Val d'Hérens</strong> to Arolla. Buy food and water, rest before the bivouac.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 11</span>07</div><div class="day-date">Fri 7 Aug</div></div>
+      <div class="day-body"><span class="region">Valais → Zurich</span><span class="tag peak">Peak · Sunrise</span><h3>Lac Bleu, alone at altitude</h3>
+      <p>Late-afternoon hike to <strong>Lac Bleu</strong> (2,090m) — glacial blue, the Dent Blanche behind. Quick daylight dip, pitch at dusk, wake for first light on the peaks, pack down at dawn. Then the long ride north to Zurich. The hardest day; split the travel off if it's too much.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 12</span>08</div><div class="day-date">Sat 8 Aug</div></div>
+      <div class="day-body"><span class="region">Zurich</span><span class="tag event">Street Parade</span><h3>The full rave day</h3>
+      <p>1pm to midnight, a million people, love mobiles circling the lake basin from Utoquai to Enge. Transit runs all night. Hydrate, no glass, comfortable shoes, a meet-up plan. Afterparties until dawn if you want them.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 13</span>09</div><div class="day-date">Sun 9 Aug</div></div>
+      <div class="day-body"><span class="region">Zurich</span><h3>Recovery</h3>
+      <p>Nothing scheduled. Long brunch, a slow lake float, a sauna. Earned.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 14</span>10</div><div class="day-date">Mon 10 Aug</div></div>
+      <div class="day-body"><span class="region">Zurich</span><h3>Buffer day</h3>
+      <p>Optional easy day trip to <strong>Lucerne</strong> (40 min), or more of Zurich at half speed.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 15</span>11</div><div class="day-date">Tue 11 Aug</div></div>
+      <div class="day-body"><span class="region">Zurich</span><h3>Last looks, repack</h3>
+      <p>Whatever you missed — a museum, a final Letten swim, a lake cruise. Pack for the flight.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 16</span>12</div><div class="day-date">Wed 12 Aug</div></div>
+      <div class="day-body"><span class="region">Departure</span><h3>Out at 5pm</h3>
+      <p>Slow morning, breakfast, train to the airport — fifteen minutes from Zurich HB.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ LAX ============ -->
+  <section class="panel" id="lax">
+    <p class="blurb">Same headline sights, more breathing room. One camp night, fewer beds, no death-marches.</p>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 01</span>28</div><div class="day-date">Tue 28 Jul</div></div>
+      <div class="day-body"><span class="region">Zurich</span><h3>Land, swim, settle</h3>
+      <p>Arrive 11am. A drift down the Limmat at <strong>Flussbad Unterer Letten</strong>, then ease into the Old Town. No rush.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 02</span>29</div><div class="day-date">Wed 29 Jul</div></div>
+      <div class="day-body"><span class="region">Appenzell</span><h3>Day trip to the hills</h3>
+      <p><strong>Ebenalp</strong>, the <strong>Aescher</strong> cliff guesthouse, and <strong>Seealpsee</strong> — then back to Zurich for the night.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 03</span>30</div><div class="day-date">Thu 30 Jul</div></div>
+      <div class="day-body"><span class="region">Lucerne</span><h3>Shift base, lake-city evening</h3>
+      <p>Move to <strong>Lucerne</strong>. Wooden bridges, lakefront, an easy dinner.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 04</span>31</div><div class="day-date">Fri 31 Jul</div></div>
+      <div class="day-body"><span class="region">Obwalden</span><h3>Lungern, unhurried</h3>
+      <p><strong>Lungerersee</strong> — a warm turquoise swim, the road viewpoint, maybe the Schönbüel climb. A slow, beautiful day.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 05</span>01</div><div class="day-date">Sat 1 Aug</div></div>
+      <div class="day-body"><span class="region">Bernese Oberland</span><h3>Settle near Interlaken</h3>
+      <p>Base yourself for two nights. Swiss National Day fireworks over the lakes after dark.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 06</span>02</div><div class="day-date">Sun 2 Aug</div></div>
+      <div class="day-body"><span class="region">Kandersteg</span><h3>Oeschinensee, as a day hike</h3>
+      <p>The turquoise lake under its rock walls — walk the shore, swim, no tent to carry. Sleep back at base.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 07</span>03</div><div class="day-date">Mon 3 Aug</div></div>
+      <div class="day-body"><span class="region">→ Ticino</span><h3>South to Locarno</h3>
+      <p>Travel over the Alps to Italian Switzerland. Lakeside evening in <strong>Locarno</strong>.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 08</span>04</div><div class="day-date">Tue 4 Aug</div></div>
+      <div class="day-body"><span class="region">Verzasca Valley</span><h3>The emerald river, slowly</h3>
+      <p><strong>Ponte dei Salti</strong>, the green pools, the old stone villages. A whole unhurried day in the valley.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 09</span>05</div><div class="day-date">Wed 5 Aug</div></div>
+      <div class="day-body"><span class="region">→ Valais</span><h3>Travel to Arolla</h3>
+      <p>Cross to the <strong>Val d'Hérens</strong>. Settle, prep, rest before tomorrow's climb.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 10</span>06</div><div class="day-date">Thu 6 Aug</div></div>
+      <div class="day-body"><span class="region">Arolla</span><span class="tag peak">Peak · Sunrise</span><h3>Lac Bleu bivouac</h3>
+      <p>The one camp night. Hike up in late light, dip in the glacial blue, sleep under the peaks, wake to the sunrise. Leave no trace.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 11</span>07</div><div class="day-date">Fri 7 Aug</div></div>
+      <div class="day-body"><span class="region">Valais → Zurich</span><h3>Down at dawn, north by train</h3>
+      <p>Pack up early, travel to Zurich, reclaim your stashed bag. Easy night before the big one.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 12</span>08</div><div class="day-date">Sat 8 Aug</div></div>
+      <div class="day-body"><span class="region">Zurich</span><span class="tag event">Street Parade</span><h3>The full rave day</h3>
+      <p>1pm to midnight around the lake basin. Hydrate, no glass, comfortable shoes. Dance.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 13</span>09</div><div class="day-date">Sun 9 Aug</div></div>
+      <div class="day-body"><span class="region">Zurich</span><h3>Recovery</h3>
+      <p>Brunch, lake, sauna, nothing.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 14</span>10</div><div class="day-date">Mon 10 Aug</div></div>
+      <div class="day-body"><span class="region">Zurich</span><h3>A free day, your call</h3>
+      <p>Lucerne, a museum, a boat — or simply rest.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 15</span>11</div><div class="day-date">Tue 11 Aug</div></div>
+      <div class="day-body"><span class="region">Zurich</span><h3>Last looks, repack</h3>
+      <p>One more swim, one more wander, pack for home.</p></div>
+    </div>
+
+    <div class="day">
+      <div class="day-index"><div class="day-num"><span class="d">Day 16</span>12</div><div class="day-date">Wed 12 Aug</div></div>
+      <div class="day-body"><span class="region">Departure</span><h3>Out at 5pm</h3>
+      <p>Easy morning, then fifteen minutes to the airport.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ NOTES ============ -->
+  <section class="notes">
+    <h2 class="section-head">Before you go</h2>
+
+    <div class="note"><h4>The travel pass</h4><p>Sixteen moving days favour a national pass over single tickets. Consecutive passes cap at 15 days — buy that plus one cheap last-day ticket, or take the Flex pass (chosen days within a month), which wins if you sit still for the Zurich cluster around the Parade. Price both before buying.</p></div>
+
+    <div class="note"><h4>Renting gear</h4><p>Transa rents tents, bags, and mats from its city branches — pick up the afternoon before, return the afternoon after. For Lac Bleu, take a cold-rated bag (around −5°C), an insulated pad you won't regret, a light tent over a bivy, and a gas stove. Carry everything out.</p></div>
+
+    <div class="note"><h4>The bivouac rule</h4><p>At Lac Bleu: one night, above the treeline, up at dusk and down at dawn, no trace, no fire. It's a tolerated grey zone — keep it solo and quiet. If the weather turns, Camping Arolla sits just below, fully legal, for a few francs.</p></div>
+
+    <div class="note"><h4>Cold water</h4><p>Lac Bleu is glacial — single digits even in August. Wade, stay shallow, do it in daylight while warm from the hike, and dry off fast. The Verzasca pools run cold with strong current. Lungern, Obersee, and Oeschinensee are the friendly swims.</p></div>
+
+    <div class="note"><h4>What's out there</h4><p>No resident bears. Wolves live in Valais but avoid people — not a tent concern. Keep food sealed and away from where you sleep, and you'll have a quiet night.</p></div>
+
+    <div class="note"><h4>Book early</h4><p>Arolla lodging and gear rental fill up across peak summer. Reserve both well ahead — and the Oeschinensee lakeside pitch too, if you take the packed route.</p></div>
+  </section>
+
+  <footer>
+    <div class="rule"></div>
+    Verzasca · Oeschinensee · Lungern · Lac Bleu · Street Parade
+  </footer>
+
 </div>
-<div id="scroll-hint"><span>scroll</span><div class="chevron"></div></div>
-
-<div id="site">
-  <div class="cursor-glow" id="glow"></div>
-  <nav>
-    <div class="nav-inner">
-      <span class="nav-name" id="nav-logo">Alejandro<span>.</span></span>
-      <div class="nav-tabs">
-        <button class="tab-btn active" onclick="showPage('research',this)">Full Résumé</button>
-        <button class="tab-btn" onclick="showPage('fintech',this)">Fintech</button>
-        <button class="tab-btn" onclick="showPage('creative',this)">Creative</button>
-        <button class="tab-btn" onclick="showPage('contact',this)">Contact</button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="page active" id="page-research">
-    <p class="hero-tag fly">Equity Research Analyst · Boston, MA &nbsp;·&nbsp; San Diego, CA &nbsp;·&nbsp; New York, NY</p>
-    <h1 class="site-h1 fly">Where passion<br>meets the <em style="font-style:normal;color:var(--gold-bright);text-shadow:0 0 25px rgba(240,180,40,0.4),0 0 60px rgba(240,180,40,0.15);">markets</em><span class="accent">.</span></h1>
-    <p class="hero-sub fly">Finance student at Northeastern (D'Amore-McKim, 2026) with two full-cycle co-ops. SIE certified.</p>
-    <div class="pills fly">
-      <span class="pill">📍 Boston, MA · San Diego, CA · New York, NY</span><a href="tel:8588883225" class="pill pill-link">📞 858-888-3225</a>
-      <a href="mailto:Alejandro.grillo98@gmail.com" class="pill pill-link">✉️ Alejandro.grillo98@gmail.com</a><a href="https://linkedin.com/in/grillo-ale" target="_blank" rel="noopener" class="pill pill-link">🔗 linkedin.com/in/grillo-ale</a>
-    </div>
-    <div class="sec fly">
-      <p class="sec-label">Experience</p>
-      <div class="exp">
-        <div><p class="exp-role">Equity Research & Wealth Management Co-op</p><p class="exp-co">Boston Research and Management (AUM $750M) · Manchester-by-the-Sea, MA</p>
-        <ul class="bullets"><li>Spearheading research on an equity addition targeting <strong style="color:var(--gold-bright);text-shadow:0 0 18px rgba(240,180,40,0.45),0 0 40px rgba(240,180,40,0.18);">~2% firmwide allocation</strong>, representing ~$6M in client AUM.</li><li>Created integrated dashboards via Bloomberg BQNT in Python to generate research tools requested by analysts.</li><li>Supporting development and due diligence of a value-oriented SMA fund — conducting equity research, building sensitivity and 3-Statement models, delivering investment pitches, and incorporating AI tooling for HNW clients.</li></ul></div>
-        <span class="exp-date">Jan 2026 – Jun 2026</span>
-      </div>
-      <div class="exp">
-        <div><p class="exp-role">Investment Management & Equity Research Co-op</p><p class="exp-co">Commonwealth Financial Network / LPL Financial (AUM $305B) · Boston, MA</p>
-        <ul class="bullets"><li>Pitched sell and subsequently exited a firmwide SMA fund holding, directly preserving a <strong style="color:var(--gold-bright);text-shadow:0 0 18px rgba(240,180,40,0.45),0 0 40px rgba(240,180,40,0.18);">~40% drop</strong> in client capital.</li><li>Executed 30+ advisor requests on equities and ETFs — sector breakdowns, valuation analysis/forecasts, factor exposure, 3-Statement models, and real-time market catalysts to support institutional investment decisions.</li><li>Trained a class of 3 interns on equity research fundamentals, financial analysis, and production of client reports.</li><li>Automated equity recommended-list updates in Python by scraping Bloomberg data to streamline slow operations.</li><li>Engaged in 50+ due diligence meetings with top asset managers; analyzed investment process, risk controls, and performance attribution to inform portfolio selection decisions.</li><li>Produced buy/sell recommendations for 27 equities, delivering a <strong style="color:var(--gold-bright)">19.84% alpha</strong> over benchmark during the co-op cycle.</li></ul></div>
-        <span class="exp-date">Jan 2025 – Jun 2025</span>
-      </div>
-      <div class="exp">
-        <div><p class="exp-role">Financial Modeling & Data Analytics Intern</p><p class="exp-co">Pathway Power LLC (Clean Energy, $100M+ funding) · Boston, MA</p>
-        <ul class="bullets"><li>Completed 20+ projects optimizing financial strategies through demand research and analysis.</li><li>Utilized and assisted in the development of financial models projecting future cash flows and monetary forecasts.</li><li>Researched and authored 5+ detailed written reports presented directly to the firm's founding partners.</li></ul></div>
-        <span class="exp-date">Jun 2024 – Dec 2024</span>
-      </div>
-    </div>
-    <div class="sec fly">
-      <p class="sec-label">Sample coverage</p>
-      <table class="cov-table">
-        <tr><th>Coverage</th><th>Firm</th><th>Action</th><th>Result</th></tr>
-        <tr><td style="font-weight:500;color:var(--ink-strong)">Chipotle (CMG)</td><td>CFN / LPL</td><td>Sell pitch + final research report</td><td><span class="live-dot">live</span><span class="rating r-exit" data-live="CMG" data-entry="57" data-mode="drop">~40% drop avoided</span></td></tr>
-        <tr><td style="font-weight:500;color:var(--ink-strong)">Semiconductor Memory Sector — Full Coverage</td><td>BRM</td><td>Covered all major industry names</td><td><span class="live-dot">live</span><span class="rating r-buy" data-live="MU" data-entry="350" data-mode="gain">Up ~70%</span></td></tr>
-        <tr><td style="font-weight:500;color:var(--ink-strong)">27 Equities</td><td>CFN / LPL</td><td>Buy / Sell recs</td><td><span class="rating r-buy">+19.84% alpha</span></td></tr>
-        <tr><td style="font-weight:500;color:var(--ink-strong)">BRM Coverage</td><td>BRM</td><td>New ~$6M allocation</td><td><span class="rating r-progress">In progress</span></td></tr>
-      </table>
-    </div>
-    <div class="sec fly">
-      <p class="sec-label">Education</p>
-      <div class="edu"><div><p class="edu-school">Northeastern University — D'Amore-McKim School of Business</p><p class="edu-deg">B.S. Finance · Minor: Data Science · GPA 3.6 · Dean's List All Years · Kappa Sigma Fraternity</p></div><span class="edu-date">2022 – 2026</span></div>
-    </div>
-    <div class="sec fly">
-      <p class="sec-label">Skills & tools</p>
-      <div class="skills-grid">
-        <div><p class="sg-name">Platforms</p><div class="tags"><span class="tag">Bloomberg</span><span class="tag">FactSet</span><span class="tag">Morningstar</span><span class="tag">CoStar</span></div></div>
-        <div><p class="sg-name">Technical</p><div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Excel</span><span class="tag">HTML</span></div></div>
-        <div><p class="sg-name">AI Tools</p><div class="tags"><span class="tag">Claude Code</span><span class="tag">Claude Excel</span><span class="tag">NotebookLM</span></div></div>
-        <div><p class="sg-name">Certifications</p><div class="tags"><span class="tag">SIE Exam</span><span class="tag">Bloomberg BMC</span><span class="tag">Bloomberg ESG</span><span class="tag">Excel Pivot Tables</span></div></div>
-        <div><p class="sg-name">Modeling</p><div class="tags"><span class="tag">DCF</span><span class="tag">3-Statement</span><span class="tag">Sensitivity</span><span class="tag">Comps</span><span class="tag">Cash flow</span></div></div>
-        <div><p class="sg-name">Languages</p><div class="tags"><span class="tag">English</span><span class="tag">Spanish</span></div></div>
-      </div>
-    </div>
-    <div class="sec fly">
-      <p class="sec-label">Leadership</p>
-      <div class="exp">
-        <div><p class="exp-role">Sector Director & Office Sector Analyst</p><p class="exp-co">Real Estate Market Roundup Club · Northeastern University</p>
-        <ul class="bullets"><li>Contributed to the club's semesterly comprehensive market report — leasing trends, vacancy rates, and post-COVID recovery.</li><li>Conducts ongoing reports on post-COVID office market growth and leisure properties using platforms like CoStar.</li><li>Attends 60+ weekly meetings, including sessions with guest speakers from leading real estate firms.</li></ul></div>
-        <span class="exp-date">Sep 2024 – Present</span>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="page" id="page-fintech">
-    <p class="hero-tag fly">Fintech & Data Projects</p>
-    <h1 class="site-h1 fly">Building what<br>I want to <em style="font-style:normal;color:var(--gold-bright);text-shadow:0 0 25px rgba(240,180,40,0.4),0 0 60px rgba(240,180,40,0.15);">analyze</em><span class="accent">.</span></h1>
-    <p class="hero-sub fly">Automation tools, data pipelines, and research infrastructure built with Python, SQL, and AI.</p>
-    <div class="pills fly"><a href="mailto:Alejandro.grillo98@gmail.com" class="pill pill-link">✉️ Alejandro.grillo98@gmail.com</a></div>
-    <div class="sec fly">
-      <p class="sec-label">Projects</p>
-      <div class="cards">
-        <div class="card" style="cursor:pointer;" onclick="scrollToDemo('demo-screener')">
-          <p class="card-title">Equity Research Screener</p><p class="card-sub">Built at BRM · Python · Bloomberg BQNT</p>
-          <p class="card-desc">Custom screener pulling live Bloomberg data to filter equities by valuation, growth, and quality factors — built to accelerate the initial idea-generation phase of the research process.</p>
-          <div class="card-tags"><span>Python</span><span>Bloomberg</span><span>BQNT</span><span>Claude Code</span></div>
-          <p style="font-size:11px;color:var(--gold);margin-top:10px;letter-spacing:.08em;">▶ Watch demo</p>
-        </div>
-        <div class="card" style="cursor:pointer;" onclick="scrollToDemo('demo-estimate')">
-          <p class="card-title">Estimate Analysis Tool</p><p class="card-sub">Built at BRM · Python · Bloomberg BQNT</p>
-          <p class="card-desc">Aggregates and visualizes sell-side earnings estimate revisions across a coverage universe, surfacing consensus shifts and outlier views at a glance.</p>
-          <div class="card-tags"><span>Python</span><span>Bloomberg</span><span>BQNT</span><span>Claude Code</span></div>
-          <p style="font-size:11px;color:var(--gold);margin-top:10px;letter-spacing:.08em;">▶ Watch demo</p>
-        </div>
-        <div class="card" style="cursor:pointer;" onclick="scrollToDemo('demo-pt')">
-          <p class="card-title">Analyst Price Target Tool</p><p class="card-sub">Built at BRM · Python · Bloomberg BQNT</p>
-          <p class="card-desc">Aggregates and visualizes sell-side price targets across a coverage universe, highlighting consensus, dispersion, and momentum in analyst views.</p>
-          <div class="card-tags"><span>Python</span><span>Bloomberg</span><span>BQNT</span><span>Claude Code</span></div>
-          <p style="font-size:11px;color:var(--gold);margin-top:10px;letter-spacing:.08em;">▶ Watch demo</p>
-        </div>
-        <div class="card">
-          <p class="card-title">Treasury Yield Curve & Essentials Analysis</p><p class="card-sub">Built at BRM · Python · Bloomberg BQNT</p>
-          <p class="card-desc">Tracks and visualizes the full Treasury yield curve alongside key macro indicators — spreads, inversions, and historical comparisons — to inform top-down fixed income and equity positioning.</p>
-          <div class="card-tags"><span>Python</span><span>Bloomberg</span><span>BQNT</span><span>Macro</span><span>Claude Code</span></div>
-        </div>
-        <div class="card">
-          <p class="card-title">HTML Equity List Automator</p><p class="card-sub">Built at CFN · Python · HTML</p>
-          <p class="card-desc">Replaced an outdated manual process the firm had been using for years — rebuilt it end-to-end in Python and HTML, cutting hours of weekly upkeep down to a single automated run.</p>
-          <div class="card-tags"><span>Python</span><span>HTML</span><span>Automation</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec fly">
-      <p class="sec-label">Demo Videos</p>
-
-      <!-- Screener -->
-      <div class="film-entry" id="demo-screener">
-        <p class="film-meta">Equity Research Screener &nbsp;·&nbsp; Bloomberg BQNT</p>
-        <div style="width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);position:relative;">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/2rvxBCf0FTc" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:block;"></iframe>
-        </div>
-      </div>
-
-      <!-- Estimate Analysis -->
-      <div class="film-entry" id="demo-estimate">
-        <p class="film-meta">Estimate Analysis Tool &nbsp;·&nbsp; Bloomberg BQNT</p>
-        <div style="width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);position:relative;">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/HETN5zP_c6o" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:block;"></iframe>
-        </div>
-      </div>
-
-      <!-- Price Target Tool -->
-      <div class="film-entry" id="demo-pt">
-        <p class="film-meta">Analyst Price Target Tool &nbsp;·&nbsp; Bloomberg BQNT</p>
-        <div style="width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);position:relative;">
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/_bVfRKhyWxY" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="display:block;"></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="page" id="page-creative">
-    <p class="hero-tag fly">Creative — Film, Art & More</p>
-    <h1 class="site-h1 fly">Another way<br>of <em style="font-style:normal;color:var(--gold-bright);text-shadow:0 0 25px rgba(240,180,40,0.4),0 0 60px rgba(240,180,40,0.15);">seeing</em><span class="accent">.</span></h1>
-    <p class="hero-sub fly">Painter, filmmaker, and video editor. The same eye for detail that goes into a model goes into every creative project.</p>
-    <div class="sec fly">
-      <p class="sec-label">Creative work</p>
-      <div class="cards">
-        <div class="card"><p class="card-title">Painting</p><p class="card-desc">Fine art painting across styles — abstract compositions to portraits.</p><div class="card-tags"><span>Fine art</span><span>Abstract</span><span>Portrait</span></div></div>
-        <div class="card"><p class="card-title">Film, Acting & Video Editing</p><p class="card-desc">Actor, filmmaker, and video editor. Comfortable in front of and behind the camera — from performance to post-production, color grading, cuts, and motion graphics.</p><div class="card-tags"><span>Acting</span><span>Film</span><span>Video editing</span><span>Post-production</span></div></div>
-        <div class="card"><p class="card-title">Athletics</p><p class="card-desc">Volleyball, weightlifting, wakeboarding, and rock climbing — a competitive mindset that carries into everything else.</p><div class="card-tags"><span>Volleyball</span><span>Weightlifting</span><span>Wakeboarding</span></div></div>
-      </div>
-    </div>
-    <div class="sec fly">
-      <p class="sec-label">Portfolio</p>
-      <div class="film-entry">
-        <p class="film-meta">I Got It — 2026 &nbsp;·&nbsp; Actor</p>
-        <div style="display:flex;flex-direction:column;gap:10px;width:100%;">
-          <img src="Hikingcloseup.jpg" style="width:100%;height:420px;object-fit:cover;display:block;border-radius:8px;">
-          <img src="hiking.jpg" style="width:100%;height:420px;object-fit:cover;display:block;border-radius:8px;">
-          <img src="tenthiking.jpg" style="width:100%;height:420px;object-fit:cover;display:block;border-radius:8px;">
-        </div>
-      </div>
-      <div class="film-entry">
-        <p class="film-meta">His Purpose — 2025 &nbsp;·&nbsp; Director</p>
-        <div style="display:flex;flex-direction:column;gap:10px;width:100%;">
-          <div style="width:100%;height:420px;border-radius:8px;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(245,238,220,0.2)" stroke-width="1.2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
-            <span style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">Image coming soon</span>
-          </div>
-          <div style="width:100%;height:420px;border-radius:8px;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(245,238,220,0.2)" stroke-width="1.2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
-            <span style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">Image coming soon</span>
-          </div>
-          <div style="width:100%;height:420px;border-radius:8px;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(245,238,220,0.2)" stroke-width="1.2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
-            <span style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">Image coming soon</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="page" id="page-contact">
-    <p class="hero-tag fly">Contact</p>
-    <h1 class="site-h1 fly">Let's <em style="font-style:normal;color:var(--gold-bright);text-shadow:0 0 25px rgba(240,180,40,0.4),0 0 60px rgba(240,180,40,0.15);">connect</em><span class="accent">.</span></h1>
-    <p class="hero-sub fly">Reach out directly — always open to conversations about markets, research, and new opportunities.</p>
-    <div class="sec fly">
-      <p class="sec-label">Get in touch</p>
-      <div style="display:flex;flex-direction:column;gap:1rem;">
-        <a href="mailto:Alejandro.grillo98@gmail.com" style="display:flex;align-items:center;gap:1.2rem;padding:1.4rem 1.6rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;transition:border-color .2s,box-shadow .2s;" onmouseover="this.style.borderColor='rgba(200,150,10,0.4)';this.style.boxShadow='0 8px 32px rgba(0,0,0,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
-          <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-          </div>
-          <div>
-            <p style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:3px;">Email</p>
-            <p style="font-size:15px;font-weight:500;color:var(--ink-strong);">Alejandro.grillo98@gmail.com</p>
-          </div>
-        </a>
-        <a href="tel:8588883225" style="display:flex;align-items:center;gap:1.2rem;padding:1.4rem 1.6rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;transition:border-color .2s,box-shadow .2s;" onmouseover="this.style.borderColor='rgba(200,150,10,0.4)';this.style.boxShadow='0 8px 32px rgba(0,0,0,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
-          <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18 2 2 0 012.08 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          </div>
-          <div>
-            <p style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:3px;">Phone</p>
-            <p style="font-size:15px;font-weight:500;color:var(--ink-strong);">(858) 888-3225</p>
-          </div>
-        </a>
-        <a href="https://linkedin.com/in/grillo-ale" target="_blank" style="display:flex;align-items:center;gap:1.2rem;padding:1.4rem 1.6rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;transition:border-color .2s,box-shadow .2s;" onmouseover="this.style.borderColor='rgba(200,150,10,0.4)';this.style.boxShadow='0 8px 32px rgba(0,0,0,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
-          <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-bright)" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </div>
-          <div>
-            <p style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:3px;">LinkedIn</p>
-            <p style="font-size:15px;font-weight:500;color:var(--ink-strong);">linkedin.com/in/grillo-ale</p>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-  <footer><span>Alejandro Grillo</span><span>Built with HTML & CSS · GitHub Pages · Made with <span class="g">♥</span></span></footer>
-</div>
-<div id="cur"></div>
 
 <script>
-(function(){
-try {
-
-/* ── CANVAS ── */
-var cv = document.getElementById('c');
-var ctx = cv.getContext('2d');
-var dpr = Math.min((window.devicePixelRatio||1),2);
-var W=0,H=0,dots=[],ripples=[],raf_t=0;
-var SPACING=20;
-
-function resize(){
-  W=window.innerWidth; H=window.innerHeight;
-  cv.width=W*dpr; cv.height=H*dpr;
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-  buildGrid();
-}
-function buildGrid(){
-  dots=[];
-  var cols=Math.ceil(W/SPACING)+2, rows=Math.ceil(H/SPACING)+2;
-  var ox=(W-(cols-1)*SPACING)/2, oy=(H-(rows-1)*SPACING)/2;
-  for(var r=0;r<rows;r++) for(var c=0;c<cols;c++)
-    dots.push({bx:ox+c*SPACING,by:oy+r*SPACING,phase:Math.random()*Math.PI*2,ox:0,oy:0});
-}
-
-var cur=document.getElementById('cur');
-var mx=-9999,my=-9999,pmx=-9999,pmy=-9999,mvx=0,mvy=0,mspeed=0;
-
-window.addEventListener('mousemove',function(e){
-  pmx=mx;pmy=my; mx=e.clientX;my=e.clientY;
-  mvx=mx-pmx;mvy=my-pmy;
-  mspeed=Math.sqrt(mvx*mvx+mvy*mvy);
-  if(cur){cur.style.left=mx+'px';cur.style.top=my+'px';}
-});
-window.addEventListener('mouseleave',function(){mx=-9999;my=-9999;mspeed=0;});
-window.addEventListener('click',function(e){
-  if(siteRevealed) return;
-  spawnRipple(e.clientX,e.clientY,1.0);
-  if(cur){cur.style.width='18px';cur.style.height='18px';cur.style.opacity='0';
-    setTimeout(function(){cur.style.width='5px';cur.style.height='5px';cur.style.opacity='1';},200);}
-});
-
-function spawnRipple(x,y,str){
-  ripples.push({x:x,y:y,r:0,maxR:Math.max(W,H)*1.2,str:str,spd:1.2+str*1.4});
-}
-function autoRipple(){
-  if(!siteRevealed) spawnRipple(W*.15+Math.random()*W*.7,H*.15+Math.random()*H*.7,0.08+Math.random()*0.1);
-  setTimeout(autoRipple,4000+Math.random()*3500);
-}
-setTimeout(function(){spawnRipple(W/2,H/2,0.38);autoRipple();},600);
-
-function drawBg(){
-  var g=ctx.createRadialGradient(W/2,H*.45,0,W/2,H*.45,Math.max(W,H)*.85);
-  g.addColorStop(0,'#1c160a');g.addColorStop(0.5,'#120e06');g.addColorStop(1,'#080602');
-  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-}
-
-var PUSH_R=88,DAMP=0.78;
-function frame(){
-  ctx.clearRect(0,0,W,H); drawBg(); raf_t+=0.007;
-  ripples=ripples.filter(function(rp){return rp.r<rp.maxR;});
-  for(var i=0;i<ripples.length;i++) ripples[i].r+=ripples[i].spd;
-  for(var di=0;di<dots.length;di++){
-    var d=dots[di];
-    var ox=d.ox*DAMP, oy=d.oy*DAMP;
-    if(mx>0&&!siteRevealed){
-      var ex=d.bx-mx,ey=d.by-my,dist=Math.sqrt(ex*ex+ey*ey);
-      if(dist<PUSH_R&&dist>0.5){
-        var f=1-dist/PUSH_R,s=f*f*(3-2*f);
-        ox+=(ex/dist)*s*0.38*(1+mspeed*0.06)*7+mvx*s*0.18;
-        oy+=(ey/dist)*s*0.38*(1+mspeed*0.06)*7+mvy*s*0.18;
-      }
-    }
-    var energy=0,warmth=0;
-    for(var ri=0;ri<ripples.length;ri++){
-      var rp=ripples[ri];
-      var rex=d.bx-rp.x,rey=d.by-rp.y,rdist=Math.sqrt(rex*rex+rey*rey);
-      var wave=rdist-rp.r;
-      var env=Math.exp(-wave*wave/600)*Math.exp(-rp.r/(rp.maxR*0.6))*rp.str;
-      if(env>0.003){
-        var nx=rdist>0?rex/rdist:0,ny=rdist>0?rey/rdist:0;
-        var push=Math.sin(wave*0.18)*env*6;
-        ox+=nx*push;oy+=ny*push;energy+=env;warmth+=env*(rdist/Math.max(W,H));
-      }
-    }
-    d.ox=ox;d.oy=oy;
-    var px=d.bx+ox,py=d.by+oy;
-    var hmx=d.bx-mx,hmy=d.by-my,hdist=Math.sqrt(hmx*hmx+hmy*hmy);
-    var halo=siteRevealed?0:Math.max(0,1-hdist/75)*0.65;
-    var clamp=Math.min(1,energy+halo*0.3);
-    var breathe=(Math.sin(raf_t+d.phase)*0.5+0.5)*0.016;
-    var wt=Math.min(1,warmth*4+halo*0.5);
-    var rr=255,gg=Math.round(210+wt*45),bb=Math.round(95+wt*160);
-    var alpha=0.05+breathe+clamp*0.82+halo*0.35;
-    var radius=0.8+clamp*2.4+halo*1.2;
-    if(clamp>0.03||halo>0.05){
-      ctx.beginPath();ctx.arc(px,py,radius*5,0,Math.PI*2);
-      ctx.fillStyle='rgba('+rr+','+gg+','+bb+','+((clamp+halo*0.3)*0.035).toFixed(3)+')';ctx.fill();
-      ctx.beginPath();ctx.arc(px,py,radius*2,0,Math.PI*2);
-      ctx.fillStyle='rgba('+rr+','+gg+','+bb+','+((clamp+halo*0.3)*0.11).toFixed(3)+')';ctx.fill();
-    }
-    ctx.beginPath();ctx.arc(px,py,radius,0,Math.PI*2);
-    ctx.fillStyle='rgba('+rr+','+gg+','+bb+','+alpha.toFixed(3)+')';ctx.fill();
-  }
-  requestAnimationFrame(frame);
-}
-window.addEventListener('resize',resize);
-resize(); requestAnimationFrame(frame);
-
-/* ══════════════════════════════════════════
-   CINEMATIC REVEAL
-   ══════════════════════════════════════════ */
-
-var siteEl     = document.getElementById('site');
-var landingUI  = document.getElementById('landing-ui');
-var scrollHint = document.getElementById('scroll-hint');
-var siteRevealed    = false;
-var revealTriggered = false;
-var inputLocked     = false;
-var revealTimers    = [];
-
-function clearRevealTimers(){
-  for(var i=0;i<revealTimers.length;i++) clearTimeout(revealTimers[i]);
-  revealTimers = [];
-}
-
-function revealTimer(fn, ms){
-  var t = setTimeout(fn, ms);
-  revealTimers.push(t);
-  return t;
-}
-
-var PANEL_STOPS = [
-  { pct: 0,    ms: 0   },
-  { pct: -3.5, ms: 480 },
-  { pct: 1.2,  ms: 620 },
-  { pct: 0,    ms: 760 },
-];
-
-function animatePanelUp(onDone){
-  siteEl.style.transition = 'none';
-  siteEl.style.top = '100vh';
-  siteEl.style.borderRadius = '20px 20px 0 0';
-
-  var stops = PANEL_STOPS;
-  function doStop(i){
-    if(i >= stops.length){ onDone(); return; }
-    var prev = stops[i-1] || stops[0];
-    var curr = stops[i];
-    var dur  = curr.ms - (prev ? prev.ms : 0);
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){
-        var ease = i===1 ? 'cubic-bezier(0.22,1,0.36,1)'
-                 : i===2 ? 'cubic-bezier(0.4,0,0.6,1)'
-                 : 'cubic-bezier(0.25,1,0.5,1)';
-        siteEl.style.transition = 'top '+dur+'ms '+ease+', border-radius '+dur+'ms ease';
-        siteEl.style.top = curr.pct+'vh';
-        if(i===1) siteEl.style.borderRadius = '0';
-        revealTimer(function(){ doStop(i+1); }, dur);
-      });
-    });
-  }
-  doStop(1);
-}
-
-function onScrollTrigger(){
-  if(revealTriggered || inputLocked) return;
-  revealTriggered = true;
-  inputLocked     = true;
-  siteRevealed    = true;
-
-  if(landingUI)  { landingUI.style.transition='opacity 0.2s ease'; landingUI.style.opacity='0'; }
-  if(scrollHint) { scrollHint.style.transition='opacity 0.15s ease'; scrollHint.style.opacity='0'; }
-  if(cur)        { cur.style.opacity='0'; }
-
-  animatePanelUp(function(){
-    siteEl.style.transition  = 'none';
-    siteEl.style.top         = '0';
-    siteEl.style.borderRadius= '0';
-    siteEl.style.overflowY   = 'auto';
-
-    flyInContent('page-research');
-
-    revealTimer(function(){ inputLocked = false; }, 900);
-  });
-}
-
-window.addEventListener('wheel', function(e){
-  if(revealTriggered) return;
-  if(Math.abs(e.deltaY) > 5) onScrollTrigger();
-}, { passive: true });
-
-var touchStartY2 = 0;
-window.addEventListener('touchstart', function(e){
-  touchStartY2 = e.touches[0].clientY;
-}, { passive: true });
-window.addEventListener('touchmove', function(e){
-  if(revealTriggered) return;
-  if(touchStartY2 - e.touches[0].clientY > 8) onScrollTrigger();
-}, { passive: true });
-
-window.addEventListener('wheel', function(e){ if(inputLocked) e.preventDefault(); }, { passive: false });
-window.addEventListener('touchmove', function(e){ if(inputLocked) e.preventDefault(); }, { passive: false });
-
-function flyInContent(pageId){
-  var page = document.getElementById(pageId);
-  if(!page) return;
-  var els = page.querySelectorAll('.fly');
-  for(var i=0; i<els.length; i++){
-    (function(el,idx){
-      setTimeout(function(){ el.classList.add('in'); }, 60 + idx*80);
-    })(els[i], i);
-  }
-}
-
-var navLogo = document.getElementById('nav-logo');
-if(navLogo){
-  navLogo.addEventListener('click', function(){
-    if(!siteRevealed) return;
-
-    clearRevealTimers();
-
-    revealTriggered = false;
-    siteRevealed    = false;
-    inputLocked     = false;
-
-    siteEl.style.transition   = 'none';
-    siteEl.style.top          = '100vh';
-    siteEl.style.borderRadius = '20px 20px 0 0';
-    siteEl.style.overflowY    = 'hidden';
-    siteEl.scrollTo({ top:0, behavior:'instant' });
-
-    document.querySelectorAll('.fly').forEach(function(el){ el.classList.remove('in'); });
-
-    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-    var rp = document.getElementById('page-research');
-    if(rp) rp.classList.add('active');
-    var ft = document.querySelector('.tab-btn');
-    if(ft) ft.classList.add('active');
-
-    if(landingUI)  { landingUI.style.transition='none'; landingUI.style.opacity='1'; }
-    if(scrollHint) { scrollHint.style.transition='none'; scrollHint.style.opacity='1'; }
-    if(cur)        { cur.style.opacity='1'; }
-  });
-}
-
-window.scrollToDemo = function(id){
-  var el = document.getElementById(id);
-  var site = document.getElementById('site');
-  if(!el || !site) return;
-  var elRect = el.getBoundingClientRect();
-  var siteRect = site.getBoundingClientRect();
-  var target = site.scrollTop + (elRect.top - siteRect.top) - 72;
-  site.scrollTo({ top: target, behavior: 'smooth' });
-};
-
-var glow = document.getElementById('glow');
-document.addEventListener('mousemove', function(e){
-  if(!siteRevealed||!glow) return;
-  glow.style.left = e.clientX+'px';
-  glow.style.top  = e.clientY+'px';
-});
-
-window.showPage = function(id, btn){
-  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  var page = document.getElementById('page-'+id);
-  if(!page||!btn) return;
-  page.classList.add('active');
-  btn.classList.add('active');
-  if(siteEl) siteEl.scrollTo({ top:0, behavior:'smooth' });
-
-  var els = page.querySelectorAll('.fly');
-  els.forEach(function(el){
-    el.style.transition = 'none';
-    el.classList.remove('in');
-  });
-  requestAnimationFrame(function(){
-    requestAnimationFrame(function(){
-      els.forEach(function(el){ el.style.transition = ''; });
-      for(var i=0; i<els.length; i++){
-        (function(el,idx){ setTimeout(function(){ el.classList.add('in'); }, 60+idx*80); })(els[i],i);
-      }
-    });
-  });
-
-
-};
-
-function animateCounters(){
-  document.querySelectorAll('[data-count]').forEach(function(el){
-    var target=parseFloat(el.dataset.count),prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'%';
-    var decimals=(target%1!==0)?2:0,startTs=null;
-    function step(ts){
-      if(!startTs) startTs=ts;
-      var prog=Math.min((ts-startTs)/1200,1),ease=1-Math.pow(1-prog,3);
-      el.textContent=prefix+(target*ease).toFixed(decimals)+suffix;
-      if(prog<1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  });
-}
-
-/* ── LIVE QUOTES (Finnhub) ──
-   Get a free key at finnhub.io and paste it below. */
-var FINNHUB_KEY = 'd8hgg0pr01qrn5ebvsk0d8hgg0pr01qrn5ebvskg';
-
-function fmtPct(n){
-  var s = (n>=0?'+':'') + Math.abs(n).toFixed(1) + '%';
-  return s;
-}
-
-function loadLiveQuotes(){
-  var els = document.querySelectorAll('[data-live]');
-  if(!els.length){ console.warn('[live] no [data-live] elements found'); return; }
-  if(!FINNHUB_KEY || FINNHUB_KEY === 'YOUR_FINNHUB_KEY'){ console.warn('[live] no API key set'); return; }
-  if(location.protocol === 'file:'){ console.warn('[live] running from file:// — fetch is blocked by the browser. Serve over http(s) or test on GitHub Pages.'); }
-
-  els.forEach(function(el){
-    var sym   = el.getAttribute('data-live');
-    var entry = parseFloat(el.getAttribute('data-entry'));
-    var mode  = el.getAttribute('data-mode'); // 'gain' or 'drop'
-
-    fetch('https://finnhub.io/api/v1/quote?symbol='+encodeURIComponent(sym)+'&token='+FINNHUB_KEY)
-      .then(function(r){
-        if(!r.ok){ console.warn('[live] '+sym+' HTTP '+r.status+' — '+(r.status===401||r.status===403?'check API key / plan':r.statusText)); }
-        return r.json();
-      })
-      .then(function(d){
-        console.log('[live] '+sym+' response:', d);
-        var price = d && d.c;
-        if(!price || price <= 0){ console.warn('[live] '+sym+' no price in response — keeping static text'); return; }
-        var pct, label;
-        if(mode === 'drop'){
-          pct = (entry - price) / entry * 100;        // % decline avoided vs sell price
-          label = fmtPct(pct).replace('+','') + ' drop avoided';
-        } else {
-          pct = (price - entry) / entry * 100;        // % gain vs buy price
-          label = (pct>=0?'Up ':'Down ') + Math.abs(pct).toFixed(1) + '%';
-        }
-        var numEl = el.querySelector('.live-num') || el;
-        numEl.textContent = label;        el.title = sym + ' live $' + price.toFixed(2) + ' · entry $' + entry.toFixed(2);
-      })
-      .catch(function(err){ console.warn('[live] '+sym+' fetch failed:', err.message, '— keeping static text'); });
-  });
-}
-loadLiveQuotes();
-
-}catch(e){console.warn('init:',e);}
-})();
+  const tabs=document.querySelectorAll('.tab');
+  const panels=document.querySelectorAll('.panel');
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('show'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.tab).classList.add('show');
+    window.scrollTo({top:document.querySelector('.tabs').offsetTop-20,behavior:'smooth'});
+  }));
 </script>
 </body>
 </html>
