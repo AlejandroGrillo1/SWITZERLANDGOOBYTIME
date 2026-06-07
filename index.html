@@ -145,6 +145,26 @@
   .day.must .region{color:var(--ink);font-weight:600}
   .day.must .region::before{content:"★ ";color:var(--accent)}
   @media(max-width:640px){.day.must{margin-left:-12px;padding-left:12px}}
+
+  /* journey strip on map tab */
+  .leg{display:flex;align-items:center}
+  .leg-stop{display:flex;align-items:center;gap:18px;padding:16px 0}
+  .leg-num{
+    font-family:'Fraunces',serif;font-size:17px;width:38px;height:38px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:50%;background:var(--beige);color:var(--ink);
+    border:1px solid var(--beige-deep);
+  }
+  .leg-num.dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .leg-num.event{background:#c9a98a;color:#fff;border-color:#c9a98a}
+  .leg-stop h4{font-family:'Fraunces',serif;font-weight:400;font-size:18px;line-height:1.2}
+  .leg-stop h4 em{font-style:normal;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-left:8px}
+  .leg-stop span{font-size:13px;color:var(--ink-soft);display:block;margin-top:2px}
+  .leg-time{
+    font-family:'Archivo',sans-serif;font-size:12px;letter-spacing:.08em;
+    color:var(--accent);padding:0 0 0 56px;
+  }
+  .leg-time em{font-style:italic;color:var(--ink-soft);font-family:'Fraunces',serif;letter-spacing:0}
   @media(max-width:640px){
     .day{grid-template-columns:1fr;gap:14px;padding:28px 0}
     .day-num{font-size:34px}
@@ -193,12 +213,81 @@
   </dl>
 
   <div class="tabs">
-    <button class="tab active" data-tab="packed">Packed — see it all</button>
-    <button class="tab" data-tab="lax">Lax — slow & easy</button>
+    <button class="tab active" data-tab="map">Map &amp; route</button>
+    <button class="tab" data-tab="packed">Packed — see it all</button>
+    <button class="tab" data-tab="lax">Lax — slow &amp; easy</button>
   </div>
 
+  <!-- ============ MAP & ROUTE ============ -->
+  <section class="panel show" id="map">
+    <p class="blurb">The whole loop — out from Zürich across the country and back for the Parade.</p>
+
+    <svg viewBox="0 0 600 400" width="100%" style="max-width:620px;display:block;margin:0 auto 18px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of Switzerland with the route stops">
+      <!-- simplified Switzerland silhouette -->
+      <path d="M40 150 C70 120 110 118 150 110 C200 100 230 78 280 84 C320 88 350 70 392 80 C430 88 470 78 520 96 C548 106 575 120 565 150 C560 175 540 188 545 215 C548 240 530 262 500 270 C470 278 450 300 410 300 C380 300 360 318 330 312 C300 306 285 296 250 300 C215 304 190 295 160 282 C128 268 95 258 72 232 C52 208 38 185 40 150 Z"
+        fill="#f4efe6" stroke="#ddd2bf" stroke-width="1.5"/>
+
+      <!-- neighbour labels -->
+      <text x="60" y="95" font-family="Archivo,sans-serif" font-size="10" fill="#c3b9a6" letter-spacing="1">FRANCE</text>
+      <text x="500" y="92" font-family="Archivo,sans-serif" font-size="10" fill="#c3b9a6" letter-spacing="1">AUSTRIA</text>
+      <text x="450" y="335" font-family="Archivo,sans-serif" font-size="10" fill="#c3b9a6" letter-spacing="1">ITALY</text>
+
+      <!-- route line through real-coordinate stops, in order -->
+      <polyline points="338,104 437,111 392,149 295,196 372,278 247,241 219,311 338,104"
+        fill="none" stroke="#c9a98a" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"/>
+
+      <!-- stops -->
+      <g font-family="Fraunces,serif">
+        <circle cx="338" cy="104" r="13" fill="#2c2823"/><text x="338" y="109" font-size="13" fill="#fbf9f4" text-anchor="middle">1</text>
+        <circle cx="437" cy="111" r="11" fill="#e9e1d3" stroke="#a8927a" stroke-width="1"/><text x="437" y="115" font-size="12" fill="#2c2823" text-anchor="middle">2</text>
+        <circle cx="392" cy="149" r="11" fill="#2c2823"/><text x="392" y="153" font-size="12" fill="#fbf9f4" text-anchor="middle">3</text>
+        <circle cx="295" cy="196" r="11" fill="#e9e1d3" stroke="#a8927a" stroke-width="1"/><text x="295" y="200" font-size="12" fill="#2c2823" text-anchor="middle">4</text>
+        <circle cx="372" cy="278" r="11" fill="#e9e1d3" stroke="#a8927a" stroke-width="1"/><text x="372" y="282" font-size="12" fill="#2c2823" text-anchor="middle">5</text>
+        <circle cx="247" cy="241" r="11" fill="#e9e1d3" stroke="#a8927a" stroke-width="1"/><text x="247" y="245" font-size="12" fill="#2c2823" text-anchor="middle">6</text>
+        <circle cx="219" cy="311" r="11" fill="#2c2823"/><text x="219" y="315" font-size="12" fill="#fbf9f4" text-anchor="middle">7</text>
+      </g>
+
+      <!-- stop labels -->
+      <g font-family="Archivo,sans-serif" font-size="11" fill="#3a352d">
+        <text x="338" y="90" text-anchor="middle">Zürich ①⑧</text>
+        <text x="453" y="114" text-anchor="start">Appenzell ②</text>
+        <text x="408" y="146" text-anchor="start">Obersee ③</text>
+        <text x="279" y="190" text-anchor="end">Lungern ④</text>
+        <text x="388" y="282" text-anchor="start">Verzasca ⑤</text>
+        <text x="231" y="237" text-anchor="end">Oeschinensee ⑥</text>
+        <text x="203" y="328" text-anchor="end">Lac Bleu ⑦</text>
+      </g>
+    </svg>
+    <p style="text-align:center;font-size:11px;color:var(--ink-soft);letter-spacing:.04em;margin:-4px 0 50px">
+      Stop positions are geographically accurate; the country outline is simplified. Dashed line = travel order 1→7, then back to Zürich for Street Parade.
+    </p>
+
+    <h2 class="section-head">Stop by stop</h2>
+    <p class="section-sub">In travel order, with approximate one-way travel time on each leg</p>
+
+    <div class="leg"><div class="leg-stop"><span class="leg-num dark">1</span><div><h4>Zürich</h4><span>Arrive · river swim · Old Town</span></div></div></div>
+    <div class="leg-time">train · 1h 45m ↓</div>
+    <div class="leg"><div class="leg-stop"><span class="leg-num">2</span><div><h4>Appenzell</h4><span>Ebenalp peak · Seealpsee lake</span></div></div></div>
+    <div class="leg-time">train · 1h 30m ↓</div>
+    <div class="leg"><div class="leg-stop"><span class="leg-num dark">3</span><div><h4>Obersee · Glarus <em>★ lake camp</em></h4><span>Tent by the water, no reservation</span></div></div></div>
+    <div class="leg-time">train via Lucerne · 2h 15m ↓</div>
+    <div class="leg"><div class="leg-stop"><span class="leg-num">4</span><div><h4>Lungern <em>★ must-see</em></h4><span>Lungerersee · warm turquoise swim</span></div></div></div>
+    <div class="leg-time">train south over the Alps · 2h 30m ↓</div>
+    <div class="leg"><div class="leg-stop"><span class="leg-num">5</span><div><h4>Verzasca · Ticino <em>★ must-see</em></h4><span>Ponte dei Salti · emerald pools</span></div></div></div>
+    <div class="leg-time">train north · 3h 35m ↓ <em>longest leg</em></div>
+    <div class="leg"><div class="leg-stop"><span class="leg-num">6</span><div><h4>Oeschinensee <em>★ must-see</em></h4><span>Kandersteg · turquoise lake, rock walls</span></div></div></div>
+    <div class="leg-time">train via Brig + PostBus · 2h 30m ↓</div>
+    <div class="leg"><div class="leg-stop"><span class="leg-num dark">7</span><div><h4>Lac Bleu d'Arolla · Valais <em>★ peak camp</em></h4><span>Sunrise bivouac above the treeline</span></div></div></div>
+    <div class="leg-time">train north to Zürich · 3h 30m ↓</div>
+    <div class="leg"><div class="leg-stop"><span class="leg-num event">8</span><div><h4>Zürich — Street Parade</h4><span>Sat 8 Aug · then recovery + fly out</span></div></div></div>
+
+    <p style="text-align:center;font-size:12px;color:var(--ink-soft);margin:42px 0 0">
+      Roughly <strong>17 hours</strong> of trains across the whole loop. The two long legs both flank the Verzasca detour — the price of keeping Ticino and Valais. Final stretches into Obersee, Verzasca, and Arolla finish with a PostBus; check the day's timetable.
+    </p>
+  </section>
+
   <!-- ============ PACKED ============ -->
-  <section class="panel show" id="packed">
+  <section class="panel" id="packed">
     <p class="blurb">Everything in: three camp nights, every lake, the works. Fast feet, big payoff.</p>
 
     <div class="day">
@@ -225,9 +314,9 @@
       <p>Up to <strong>Lake Obersee</strong> (983m), the Brünnelistock mirrored in still water. Lakeside campground, no reservation needed. If energy's high, fit the steep <strong>Limmernsee</strong> funicular-and-hike nearby. Swim, pitch on the grass.</p></div>
     </div>
 
-    <div class="day">
+    <div class="day must">
       <div class="day-index"><div class="day-num"><span class="d">Day 05</span>01</div><div class="day-date">Sat 1 Aug</div></div>
-      <div class="day-body"><span class="region">Obwalden</span><h3>Lungern, on national day</h3>
+      <div class="day-body"><span class="region">Obwalden</span><span class="tag must">Must-see</span><h3>Lungern, on national day</h3>
       <p>Golden Pass line via Lucerne to <strong>Lungerersee</strong> — turquoise, swimmable at ~23°C, beaches. Do the road viewpoint and the climb to <strong>Schönbüel</strong> for the aerial shot. Bonfires and fireworks for Swiss National Day after dark.</p></div>
     </div>
 
@@ -237,9 +326,9 @@
       <p>A long, gorgeous ride to <strong>Locarno</strong>. Palms, Lake Maggiore, Italian Switzerland — a different country entirely. Evening on the waterfront.</p></div>
     </div>
 
-    <div class="day">
+    <div class="day must">
       <div class="day-index"><div class="day-num"><span class="d">Day 07</span>03</div><div class="day-date">Mon 3 Aug</div></div>
-      <div class="day-body"><span class="region">Verzasca Valley</span><h3>The emerald river</h3>
+      <div class="day-body"><span class="region">Verzasca Valley</span><span class="tag must">Must-see</span><h3>The emerald river</h3>
       <p>PostBus up the valley (no train). <strong>Lavertezzo's Ponte dei Salti</strong> stone bridge and its impossibly green pools — swim with care, the current is strong. On to <strong>Sonogno</strong> or tiny <strong>Corippo</strong>. No wild camping here; day trip only.</p></div>
     </div>
 
@@ -249,9 +338,9 @@
       <p>Travel via Bern to <strong>Kandersteg</strong>. Settle, scope the Oeschinensee gondola for tomorrow.</p></div>
     </div>
 
-    <div class="day">
+    <div class="day must">
       <div class="day-index"><div class="day-num"><span class="d">Day 09</span>05</div><div class="day-date">Wed 5 Aug</div></div>
-      <div class="day-body"><span class="region">Kandersteg</span><span class="tag lake">Lake Camp II</span><h3>Oeschinensee, walled in rock</h3>
+      <div class="day-body"><span class="region">Kandersteg</span><span class="tag must">Must-see</span><span class="tag lake">Lake Camp II</span><h3>Oeschinensee, walled in rock</h3>
       <p>Gondola and a short walk to the UNESCO turquoise lake under towering cliffs — the most dramatic water of the trip. Use the legal <strong>lakeside campground</strong>. Hike the shore, swim.</p></div>
     </div>
 
@@ -320,9 +409,9 @@
       <p>Move to <strong>Lucerne</strong>. Wooden bridges, lakefront, an easy dinner.</p></div>
     </div>
 
-    <div class="day">
+    <div class="day must">
       <div class="day-index"><div class="day-num"><span class="d">Day 04</span>31</div><div class="day-date">Fri 31 Jul</div></div>
-      <div class="day-body"><span class="region">Obwalden</span><h3>Lungern, unhurried</h3>
+      <div class="day-body"><span class="region">Obwalden</span><span class="tag must">Must-see</span><h3>Lungern, unhurried</h3>
       <p><strong>Lungerersee</strong> — a warm turquoise swim, the road viewpoint, maybe the Schönbüel climb. A slow, beautiful day.</p></div>
     </div>
 
@@ -332,9 +421,9 @@
       <p>Base yourself for two nights. Swiss National Day fireworks over the lakes after dark.</p></div>
     </div>
 
-    <div class="day">
+    <div class="day must">
       <div class="day-index"><div class="day-num"><span class="d">Day 06</span>02</div><div class="day-date">Sun 2 Aug</div></div>
-      <div class="day-body"><span class="region">Kandersteg</span><h3>Oeschinensee, as a day hike</h3>
+      <div class="day-body"><span class="region">Kandersteg</span><span class="tag must">Must-see</span><h3>Oeschinensee, as a day hike</h3>
       <p>The turquoise lake under its rock walls — walk the shore, swim, no tent to carry. Sleep back at base.</p></div>
     </div>
 
@@ -344,9 +433,9 @@
       <p>Travel over the Alps to Italian Switzerland. Lakeside evening in <strong>Locarno</strong>.</p></div>
     </div>
 
-    <div class="day">
+    <div class="day must">
       <div class="day-index"><div class="day-num"><span class="d">Day 08</span>04</div><div class="day-date">Tue 4 Aug</div></div>
-      <div class="day-body"><span class="region">Verzasca Valley</span><h3>The emerald river, slowly</h3>
+      <div class="day-body"><span class="region">Verzasca Valley</span><span class="tag must">Must-see</span><h3>The emerald river, slowly</h3>
       <p><strong>Ponte dei Salti</strong>, the green pools, the old stone villages. A whole unhurried day in the valley.</p></div>
     </div>
 
